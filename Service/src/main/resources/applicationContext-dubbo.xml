@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+        >
+
+    <!-- context-->
+
+
+    <dubbo:provider/>
+
+    <dubbo:application name="${projectName}"/>
+
+    <dubbo:registry id="remote_registry" address="${registry.url}" timeout="${registry.timeout}"/>
+
+    <dubbo:protocol name="dubbo"/>
+    <!--<dubbo:protocol name="rmiex" port="${protocol.rmiex.port}" codec="spring" />-->
+    <!--<dubbo:protocol name="rmi" port="8765" codec="spring"/>-->
+    <!--<dubbo:protocol name="rest" port="${protocol.http.port}" server="servlet" serialization="kryo" contextpath="${rest.contextpath}" extension="com.bingdian.dubboservice.extension.rest.ResponselFilter,com.bingdian.dubboservice.extension.rest.WriterInterceptorEx,com.bingdian.dubboservice.extension.rest.CustomExceptionMapper,com.bingdian.dubboservice.extension.rest.MyValidationExceptionMapper"/>-->
+    <!--<dubbo:protocol name="http" port="${protocal.dubbo.http}"/>-->
+    <!--<dubbo:protocol name="webservice" port="8888" />-->
+    <!--<dubbo:protocol name="demo"  />-->
+
+    <dubbo:annotation package="com.handtours"/>
+
+
+    <beans profile="product">
+        <dubbo:monitor protocol="registry"/>
+    </beans>
+
+</beans>

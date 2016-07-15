@@ -1,0 +1,13 @@
+*.class
+
+.svn
+target
+#.gitignore
+*.iml
+buildresult/*
+.idea
+out
+
+!*.exe
+!*.pdb
+!*.dll
