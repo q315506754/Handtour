@@ -11,6 +11,14 @@ public class SaveUserReq extends Req {
     private String username;
     private String password;
 
+    public SaveUserReq(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public SaveUserReq() {
+    }
+
     public String getUsername() {
         return username;
     }

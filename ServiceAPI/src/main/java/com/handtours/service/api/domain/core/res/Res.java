@@ -14,8 +14,8 @@ import java.io.Serializable;
  */
 public class Res implements Serializable {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Integer code;
-    private String msg;
+    private Integer code=0;
+    private String msg="ok";
 
     public Logger getLogger() {
         return logger;

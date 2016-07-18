@@ -1,5 +1,7 @@
 package com.handtours.service.impltest.project.back;
 
+import com.handtours.service.api.domain.back.req.SaveUserReq;
+import com.handtours.service.api.domain.back.res.SaveUserRes;
 import com.handtours.service.api.project.back.IUser;
 import com.handtours.service.dao.back.UserMapper;
 import com.handtours.service.model.back.User;
@@ -8,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.ArrayList;
 
 /**
  * @author Jiangli
@@ -23,6 +27,24 @@ public class UserTest {
     @Test
     public void func() {
         System.out.println(iUser);
+    }
+
+    @Test
+    public void func2() {
+        ArrayList<SaveUserReq> params = new ArrayList<>();
+        params.add(new SaveUserReq("13761156783","123456"));
+        params.add(new SaveUserReq("13761156786","123456"));
+        SaveUserRes res = iUser.batInsert(params);
+        System.out.println(res);
+    }
+
+    @Test
+    public void func3() {
+        ArrayList<SaveUserReq> params = new ArrayList<>();
+        params.add(new SaveUserReq("13761156782","123456"));
+        params.add(new SaveUserReq("13761156786","123456"));
+        SaveUserRes res = iUser.batInsert2(params);
+        System.out.println(res);
     }
 
 }

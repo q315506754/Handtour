@@ -6,24 +6,18 @@
         <groupId>com.Handtour</groupId>
         <artifactId>Handtour-parent</artifactId>
         <version>${com.provider-version}</version>
-
     </parent>
+    
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.Handtour</groupId>
-    <artifactId>ServiceAPI</artifactId>
+    <artifactId>ConsumerExample</artifactId>
     <packaging>jar</packaging>
     <version>${com.provider-version}</version>
-
 
     <dependencies>
         <dependency>
             <groupId>com.Handtour</groupId>
             <artifactId>Common</artifactId>
-            <version>${com.provider-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.Handtour</groupId>
-            <artifactId>ServiceAPI</artifactId>
             <version>${com.provider-version}</version>
         </dependency>
 
@@ -42,8 +36,7 @@
     </dependencies>
 
     <build>
-        <finalName>handtour-api-${com.provider-version}</finalName>
+        <finalName>handtour-ConsumerExample-${com.provider-version}</finalName>
     </build>
-
     
 </project>

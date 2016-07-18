@@ -1,13 +1,19 @@
 package com.handtours.service.impl.project.back;
 
+import com.handtours.common.utils.Copier;
+import com.handtours.common.utils.PathUtil;
 import com.handtours.service.api.domain.back.req.LoginReq;
 import com.handtours.service.api.domain.back.req.SaveUserReq;
 import com.handtours.service.api.domain.back.res.LoginRes;
 import com.handtours.service.api.domain.back.res.SaveUserRes;
 import com.handtours.service.api.project.back.IUser;
 import com.handtours.service.dao.back.UserMapper;
+import com.handtours.service.impl.project.core.ImplSupport;
+import com.handtours.service.model.back.User;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,19 +27,64 @@ public class UserImpl extends ImplSupport implements IUser {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
+
     @Override
     public LoginRes login(LoginReq param) {
         return null;
     }
 
-    @Transactional(propagation= Propagation.REQUIRED,rollbackForClassName="Exception")
+    /**
+     * 注解事务test
+     * 任意一条插入失败会导致回滚
+     * @param params
+     * @return
+     */
+    @Transactional
     @Override
     public SaveUserRes batInsert(List<SaveUserReq> params) {
+        SaveUserRes res = new SaveUserRes();
         for (SaveUserReq param : params) {
-//            userMapper.insert();
+            User record = convertReqToModel(param);
+
+            userMapper.insert(record);
         }
-        return null;
+        return res;
     }
 
+    private User convertReqToModel(SaveUserReq param) {
+        User user = Copier.to(User.class).map("username","mobile").map("password","password",(val)->String.valueOf(val)).from(param);
+        logger.debug("user:"+user);
 
+        return user;
+    }
+
+    /**
+     * SqlSession事务 批量操作test
+     * 任意一条插入失败会导致回滚
+     * @param params
+     * @return
+     */
+    @Override
+    public SaveUserRes batInsert2(List<SaveUserReq> params) {
+        SaveUserRes res = new SaveUserRes();
+        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+
+        try {
+            for (SaveUserReq param : params) {
+                User record = convertReqToModel(param);
+
+                sqlSession.insert(PathUtil.buildCls(UserMapper.class,"insert"),record);
+            }
+            sqlSession.flushStatements();
+        } catch (Exception e){
+            e.printStackTrace();
+            res.setCode(1);
+            res.setMsg(e.getMessage());
+        } finally{
+            sqlSession.close();
+        }
+        return res;
+    }
 }

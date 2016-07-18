@@ -27,7 +27,7 @@ CREATE TABLE `back_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of back_user
+-- Records to back_user
 -- ----------------------------
 INSERT INTO `back_user` VALUES ('13761156786', '蒋礼', 'e10adc3949ba59abbe56e057f20f883e');
 
@@ -43,6 +43,6 @@ CREATE TABLE `weixin_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of weixin_user
+-- Records to weixin_user
 -- ----------------------------
 INSERT INTO `weixin_user` VALUES ('13761156786', '蒋礼', 'e10adc3949ba59abbe56e057f20f883e');

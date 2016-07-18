@@ -10,6 +10,8 @@ import net.sf.json.JSONObject;
 public class ClassUtil {
 
     public static String getToString(Object model) {
-        return model.getClass()+"_"+ JSONObject.fromObject(model).toString();
+        JSONObject jsonObject = JSONObject.fromObject(model);
+        jsonObject.remove("logger");
+        return model.getClass()+"_"+ jsonObject.toString();
     }
 }

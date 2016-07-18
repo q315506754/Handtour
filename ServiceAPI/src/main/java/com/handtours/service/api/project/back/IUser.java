@@ -16,4 +16,6 @@ public interface IUser {
     LoginRes login(LoginReq param);
 
     SaveUserRes batInsert(List<SaveUserReq> params);
+
+    SaveUserRes batInsert2(List<SaveUserReq> params);
 }
