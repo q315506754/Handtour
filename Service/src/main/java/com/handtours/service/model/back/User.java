@@ -1,6 +1,8 @@
 package com.handtours.service.model.back;
 
-public class User {
+import com.handtours.service.model.core.Model;
+
+public class User extends Model{
     private String mobile;
 
     private String name;

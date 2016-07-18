@@ -41,11 +41,11 @@
 
         <!---->
         <!--<table tableName="back_user" domainObjectName="back.User"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
-                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+        <!--replaceString=""/>&ndash;&gt;-->
         <!--</table>-->
 
         <table tableName="weixin_user" domainObjectName="weixin.User"

@@ -1,9 +1,7 @@
 package com.handtours.service.dao.back;
 
 import com.handtours.service.model.back.User;
-import org.springframework.beans.factory.annotation.Qualifier;
 
-@Qualifier("bbb")
 public interface UserMapper {
     int deleteByPrimaryKey(String mobile);
 

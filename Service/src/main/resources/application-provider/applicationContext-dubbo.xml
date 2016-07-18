@@ -19,7 +19,7 @@
 
     <dubbo:registry id="remote_registry" address="${registry.url}" timeout="${registry.timeout}"/>
 
-    <dubbo:protocol name="dubbo"/>
+    <dubbo:protocol name="dubbo" port="20880" />
     <!--<dubbo:protocol name="rmiex" port="${protocol.rmiex.port}" codec="spring" />-->
     <!--<dubbo:protocol name="rmi" port="8765" codec="spring"/>-->
     <!--<dubbo:protocol name="rest" port="${protocol.http.port}" server="servlet" serialization="kryo" contextpath="${rest.contextpath}" extension="com.bingdian.dubboservice.extension.rest.ResponselFilter,com.bingdian.dubboservice.extension.rest.WriterInterceptorEx,com.bingdian.dubboservice.extension.rest.CustomExceptionMapper,com.bingdian.dubboservice.extension.rest.MyValidationExceptionMapper"/>-->
