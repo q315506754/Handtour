@@ -12,6 +12,6 @@ public class ClassUtil {
     public static String getToString(Object model) {
         JSONObject jsonObject = JSONObject.fromObject(model);
         jsonObject.remove("logger");
-        return model.getClass()+"_"+ jsonObject.toString();
+        return model.getClass() + "_" + jsonObject.toString();
     }
 }

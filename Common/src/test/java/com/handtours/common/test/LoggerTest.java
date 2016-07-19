@@ -16,7 +16,7 @@ public class LoggerTest {
     @Test
     public void func() {
         logger.debug("log ok..");
-        Assert.assertTrue("ok",true);
+        Assert.assertTrue("ok", true);
     }
 
 }

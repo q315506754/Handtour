@@ -2,7 +2,6 @@ package com.handtours.common.utils;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -12,8 +11,9 @@ import java.util.Map;
  *         CreatedTime  2016/7/18 0018 16:55
  */
 public class Copier<T> {
-    private Class<T>  destCls ;
-    private ArrayList<CopierMapper> mappers=new ArrayList<>();
+    private Class<T> destCls;
+    private T dest;
+    private ArrayList<CopierMapper> mappers = new ArrayList<>();
     public static CopierFieldConvertor sameNameConvertor = new SameTypeConvertor();
 
     static class SameTypeConvertor implements CopierFieldConvertor {
@@ -26,7 +26,7 @@ public class Copier<T> {
     private Copier() {
     }
 
-    class CopierMapper{
+    class CopierMapper {
         String fieldFrom;
         String fieldTo;
         CopierFieldConvertor convertor;
@@ -39,16 +39,16 @@ public class Copier<T> {
     }
 
 
-    public Copier<T> map( String fieldFrom, String fieldTo){
-        return map(fieldFrom,fieldTo,sameNameConvertor);
+    public Copier<T> map(String fieldFrom, String fieldTo) {
+        return map(fieldFrom, fieldTo, sameNameConvertor);
     }
 
-    public Copier<T> map( String fieldFrom, String fieldTo,CopierFieldConvertor convertor){
+    public Copier<T> map(String fieldFrom, String fieldTo, CopierFieldConvertor convertor) {
         mappers.add(new CopierMapper(fieldFrom, fieldTo, convertor));
         return this;
     }
 
-    public static<T>  Copier<T> to(Class<T> cls){
+    public static <T> Copier<T> to(Class<T> cls) {
         Copier ret = new Copier();
         try {
             ret.destCls = cls;
@@ -59,13 +59,26 @@ public class Copier<T> {
         return null;
     }
 
-    public  T from(Object src){
+    public static <T> Copier<T> to(Object ins) {
+        Copier ret = new Copier();
         try {
-            T  dest = destCls.newInstance();
+            ret.dest = ins;
+            return ret;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public T from(Object src) {
+        try {
+            if (dest == null) {
+                dest = destCls.newInstance();
+            }
 
             try {
                 Map describe = BeanUtils.describe(src);
-                BeanUtils.populate(dest,describe);
+                BeanUtils.populate(dest, describe);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -74,7 +87,7 @@ public class Copier<T> {
                 try {
                     Object srcVal = MethodUtil.invokeGetter(src, mapper.fieldFrom);
                     Object convertedVal = mapper.convertor.convert(srcVal);
-                    MethodUtil.invokeSetter(dest,mapper.fieldTo,convertedVal);
+                    MethodUtil.invokeSetter(dest, mapper.fieldTo, convertedVal);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

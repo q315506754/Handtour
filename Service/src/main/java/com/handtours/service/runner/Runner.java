@@ -26,12 +26,12 @@ public class Runner {
             List<Props> props = PropertiesUtil.getProps();
             for (Props prop : props) {
                 Properties properties = prop.getProperties();
-                logger.debug(""+prop.getFileName());
+                logger.debug("" + prop.getFileName());
                 Enumeration<?> enumeration = properties.propertyNames();
                 while (enumeration.hasMoreElements()) {
                     Object element = enumeration.nextElement();
                     Object val = properties.get(element);
-                    logger.debug(">>>"+element+":"+val);
+                    logger.debug(">>>" + element + ":" + val);
                 }
                 logger.debug("------------------");
             }

@@ -45,5 +45,5 @@
         <finalName>handtour-api-${com.provider-version}</finalName>
     </build>
 
-    
+
 </project>

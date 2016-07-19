@@ -15,38 +15,39 @@ public class MethodUtil {
                 && method.getReturnType() != void.class
                 && method.getParameterTypes().length == 0
                 && Modifier.isPublic(method.getModifiers())
-                && ! Modifier.isStatic(method.getModifiers())) {
+                && !Modifier.isStatic(method.getModifiers())) {
             return true;
         }
         return false;
     }
+
     public static boolean isSetter(Method method) {
         if (method.getDeclaringClass() != Object.class
                 && method.getReturnType() == void.class
                 && method.getParameterTypes().length == 1
                 && Modifier.isPublic(method.getModifiers())
-                && ! Modifier.isStatic(method.getModifiers())) {
+                && !Modifier.isStatic(method.getModifiers())) {
             return true;
         }
         return false;
     }
 
     public static Class<?> getBoxedClass(Class<?> c) {
-        if( c == int.class )
+        if (c == int.class)
             c = Integer.class;
-        else if( c == boolean.class )
+        else if (c == boolean.class)
             c = Boolean.class;
-        else  if( c == long.class )
+        else if (c == long.class)
             c = Long.class;
-        else if( c == float.class )
+        else if (c == float.class)
             c = Float.class;
-        else if( c == double.class )
+        else if (c == double.class)
             c = Double.class;
-        else if( c == char.class )
+        else if (c == char.class)
             c = Character.class;
-        else if( c == byte.class )
+        else if (c == byte.class)
             c = Byte.class;
-        else if( c == short.class )
+        else if (c == short.class)
             c = Short.class;
         return c;
     }
@@ -54,14 +55,16 @@ public class MethodUtil {
     public static String getGetterString(String property) {
         return "get" + property.substring(0, 1).toUpperCase() + property.substring(1);
     }
+
     public static String getIsGetterString(String property) {
         return "is" + property.substring(0, 1).toUpperCase() + property.substring(1);
     }
+
     public static String getSetterString(String property) {
         return "set" + property.substring(0, 1).toUpperCase() + property.substring(1);
     }
 
-    public static Method getGetter(Class cls,String property) throws NoSuchMethodException {
+    public static Method getGetter(Class cls, String property) throws NoSuchMethodException {
         String getterString = getGetterString(property);
 
         Method method = null;
@@ -75,7 +78,7 @@ public class MethodUtil {
         }
 
         if (!MethodUtil.isGetter(method)) {
-            throw new NoSuchMethodError("is Not Getter:"+getterString);
+            throw new NoSuchMethodError("is Not Getter:" + getterString);
         }
         return method;
     }
@@ -85,28 +88,30 @@ public class MethodUtil {
         Class<?> returnType = getter.getReturnType();
         return returnType;
     }
-    public static Method getSetter(Class cls,String property) throws NoSuchMethodException {
+
+    public static Method getSetter(Class cls, String property) throws NoSuchMethodException {
         Method getter = getGetter(cls, property);
         Class<?> returnType = getter.getReturnType();
 
         String setterString = getSetterString(property);
         Method method = cls.getMethod(setterString, new Class[]{returnType});
         if (!MethodUtil.isSetter(method)) {
-            throw new NoSuchMethodError("is Not Setter:"+setterString);
+            throw new NoSuchMethodError("is Not Setter:" + setterString);
         }
         return method;
     }
 
-    public static Object invokeGetter(Object obj,String property) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static Object invokeGetter(Object obj, String property) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<?> aClass = obj.getClass();
         Method getter = getGetter(aClass, property);
         Object invoke = getter.invoke(obj);
         return invoke;
     }
-    public static Object invokeSetter(Object obj,String property,Object value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+    public static Object invokeSetter(Object obj, String property, Object value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<?> aClass = obj.getClass();
         Method setter = getSetter(aClass, property);
-        Object invoke = setter.invoke(obj,value);
+        Object invoke = setter.invoke(obj, value);
         return invoke;
     }
 }

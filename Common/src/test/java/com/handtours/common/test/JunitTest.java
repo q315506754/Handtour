@@ -12,7 +12,7 @@ public class JunitTest {
 
     @Test
     public void func() {
-        Assert.assertTrue("ok",true);
+        Assert.assertTrue("ok", true);
     }
 
 }

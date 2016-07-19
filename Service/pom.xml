@@ -172,27 +172,27 @@
             </plugin>
 
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-shade-plugin</artifactId>-->
-                <!--<version>2.3</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>shade</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--&lt;!&ndash;<createSourcesJar>true</createSourcesJar>&ndash;&gt;-->
-                            <!--<promoteTransitiveDependencies>true</promoteTransitiveDependencies>-->
-                            <!--<artifactSet>-->
-                                <!--<includes>-->
-                                    <!--<include>com.Handtour:Common</include>-->
-                                    <!--<include>com.Handtour:ServiceAPI</include>-->
-                                <!--</includes>-->
-                            <!--</artifactSet>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--<version>2.3</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>shade</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--&lt;!&ndash;<createSourcesJar>true</createSourcesJar>&ndash;&gt;-->
+            <!--<promoteTransitiveDependencies>true</promoteTransitiveDependencies>-->
+            <!--<artifactSet>-->
+            <!--<includes>-->
+            <!--<include>com.Handtour:Common</include>-->
+            <!--<include>com.Handtour:ServiceAPI</include>-->
+            <!--</includes>-->
+            <!--</artifactSet>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
 
         </plugins>

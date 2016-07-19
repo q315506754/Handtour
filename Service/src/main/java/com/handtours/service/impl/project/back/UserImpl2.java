@@ -23,7 +23,7 @@ import java.util.List;
  *
  *         CreatedTime  2016/7/18 0018 10:43
  */
-public class UserImpl extends ImplSupport implements IUser {
+public class UserImpl2 extends ImplSupport implements IUser {
     @Autowired
     private UserMapper userMapper;
 

@@ -10,7 +10,6 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.*;
 import java.net.JarURLConnection;
-import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +27,16 @@ public final class PropertiesUtil {
 
     static {
         for (String s : propsList) {
-            logger.debug("loading:"+s);
+            logger.debug("loading:" + s);
             try {
                 PathMatchingResourcePatternResolver p = new PathMatchingResourcePatternResolver();
                 Resource[] resources = p.getResources(s);
-                logger.debug("length:"+resources.length);
+                logger.debug("length:" + resources.length);
                 for (Resource resource : resources) {
                     boolean jarURL = ResourceUtils.isJarURL(resource.getURL());
-                    logger.debug(s+"--"+resource.getFilename()+" in Jar?"+jarURL);
+                    logger.debug(s + "--" + resource.getFilename() + " in Jar?" + jarURL);
                     URLConnection con = resource.getURL().openConnection();
-                    logger.debug("con:"+con.getClass());
+                    logger.debug("con:" + con.getClass());
 
                     if (con instanceof JarURLConnection) {
                         logger.debug("JarURLConnection.......");
@@ -45,7 +44,7 @@ public final class PropertiesUtil {
                         JarURLConnection jarCon = (JarURLConnection) con;
                         JarFile jarFile = jarCon.getJarFile();
                         JarEntry jarEntry = jarCon.getJarEntry();
-                        addFile(jarFile.getInputStream(jarEntry),resource.getFilename());
+                        addFile(jarFile.getInputStream(jarEntry), resource.getFilename());
                     } else {
                         logger.debug("common file connection.......");
                         File file = resource.getFile();
@@ -55,7 +54,7 @@ public final class PropertiesUtil {
 
                 }
             } catch (Exception e) {
-                logger.error(e.getMessage(),e);
+                logger.error(e.getMessage(), e);
                 logger.error("loading:" + s + " error..." + e.getMessage());
             }
             logger.debug(".................................");
@@ -63,7 +62,7 @@ public final class PropertiesUtil {
 
     }
 
-    private static void addFile(InputStream in,String fileName) throws IOException {
+    private static void addFile(InputStream in, String fileName) throws IOException {
         Props one = new Props();
 
         Properties properties = new Properties();
@@ -76,6 +75,7 @@ public final class PropertiesUtil {
         props.add(one);
 
     }
+
     private static void addFile(File file) throws IOException {
         InputStream in = new BufferedInputStream(new FileInputStream(file));
         addFile(in, file.getName());
