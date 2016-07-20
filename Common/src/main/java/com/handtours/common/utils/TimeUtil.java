@@ -22,6 +22,13 @@ public class TimeUtil {
     }
 
     public static String getCNString(double ts) {
+        return getCNString(ts,true,true,true,true,false);
+    }
+    public static String getCNSAndMilitring(double ts) {
+        return getCNString(ts,true,true,true,true,true);
+    }
+    public static String getCNString(double ts,boolean b_d,boolean b_h,boolean b_m,boolean b_s,boolean b_ms) {
+        int ms = (int)ts%1000;
         int t = (int) (ts / 1000);
         int sec = t % 60;
         t /= 60;
@@ -30,17 +37,20 @@ public class TimeUtil {
         int hour = t % 24;
         t /= 24;
         StringBuilder sb = new StringBuilder();
-        if (t > 0) {
+        if (t > 0 && b_d) {
             sb.append(t + "天");
         }
-        if (hour > 0) {
+        if (hour > 0 && b_h) {
             sb.append(hour + "时");
         }
-        if (min > 0) {
+        if (min > 0 && b_m) {
             sb.append(min + "分");
         }
-        if (sec > 0) {
+        if (sec > 0 && b_s) {
             sb.append(sec + "秒");
+        }
+        if (ms > 0 && b_ms) {
+            sb.append(ms + "毫秒");
         }
 
         if (sb.length() == 0) {

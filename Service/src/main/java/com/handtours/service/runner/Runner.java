@@ -2,6 +2,7 @@ package com.handtours.service.runner;
 
 import com.handtours.common.utils.PropertiesUtil;
 import com.handtours.common.utils.Props;
+import com.handtours.common.utils.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -21,6 +22,7 @@ public class Runner {
      */
     public static void main(String[] args) {
         try {
+            long l = System.currentTimeMillis();
             logger.debug("start runner.");
             logger.debug("load props...");
             List<Props> props = PropertiesUtil.getProps();
@@ -40,6 +42,8 @@ public class Runner {
             ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:application-*/*.xml");
             logger.debug("load xml over...");
 
+            long cost = System.currentTimeMillis() - l;
+            logger.debug("cost time:"+ TimeUtil.getCNSAndMilitring(cost));
 //            System.in.read(); // 按任意键退出
             synchronized (logger) {
                 logger.wait();

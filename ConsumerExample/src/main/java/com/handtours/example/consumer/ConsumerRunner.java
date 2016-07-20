@@ -13,8 +13,8 @@ import java.util.concurrent.Executors;
 
 /**
  */
-public class Runner {
-    protected final static Logger logger = LoggerFactory.getLogger(Runner.class);
+public class ConsumerRunner {
+    protected final static Logger logger = LoggerFactory.getLogger(ConsumerRunner.class);
 
     /**
      * @param args

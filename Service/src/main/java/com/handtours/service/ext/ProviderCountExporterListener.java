@@ -6,6 +6,7 @@ import com.alibaba.dubbo.rpc.Exporter;
 import com.alibaba.dubbo.rpc.ExporterListener;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.RpcException;
+import com.handtours.service.utils.DubboUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +27,14 @@ public class ProviderCountExporterListener implements ExporterListener {
         if (Constants.LOCAL_PROTOCOL.toString().equals(url.getProtocol())) {
             return;
         }
-        String group = url.getParameter(Constants.GROUP_KEY, "NONE");
-        String uniqueKey = group + "/" + anInterface.getCanonicalName();
+        String uniqueKey = DubboUtil.uniqueKey(anInterface, url);
 
-        logger.debug((++count) + ">>>" + uniqueKey + " >>>URL:" + url);
+        String prefix = ">>>";
+        String dprefix = prefix+prefix;
+        logger.debug((++count) + prefix + "uniqueKey:"+uniqueKey);
+        logger.debug(dprefix +"URL:"+url);
+        logger.debug(dprefix +"impl:"+JavassistExProxyFactory.infToImplMap.get(uniqueKey));
+
 
     }
 

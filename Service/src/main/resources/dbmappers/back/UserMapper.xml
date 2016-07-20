@@ -8,6 +8,10 @@
             size="512"
             readOnly="true" />
 
+    <!-- 缓存 -->
+    <!--<cache eviction="LRU" type="app.platform.mybatis.MybatisRedisCache" />-->
+
+
     <resultMap id="BaseResultMap" type="com.handtours.service.model.back.User">
         <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>

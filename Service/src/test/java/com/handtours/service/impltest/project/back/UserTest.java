@@ -6,6 +6,7 @@ import com.handtours.service.api.project.back.IUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 @ContextConfiguration(locations = {"classpath*:application-common/*.xml", "classpath*:application-service/*.xml"})
 public class UserTest {
     @Autowired
+    @Qualifier("bean_back_user")
     private IUser iUser;
 
     @Test

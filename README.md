@@ -14,6 +14,10 @@ java/dao/xxxMapper.class  (接口,候选bean)
 java/model/xxx.class (数据库字段对应类)
 resources/dbmappers/xxxMapper.xml (执行的sql语句 及 model、dao等等关系绑定)
 
+使用到的组件(需确保地址得到正确配置):
+Mysql
+Zookeeper
+
 
 
 
