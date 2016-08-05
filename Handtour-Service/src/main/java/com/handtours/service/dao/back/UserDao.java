@@ -1,6 +1,6 @@
-package com.handtours.service.jpa.dao.back;
+package com.handtours.service.dao.back;
 
-import com.handtours.service.jpa.model.back.UserInfo;
+import com.handtours.service.model.back.UserInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

@@ -1,10 +1,7 @@
 package com.handtours.service.commontest;
 
-import com.handtours.service.dao.back.UserMapper;
-import com.handtours.service.jpa.dao.back.UserDao;
-import com.handtours.service.jpa.model.back.UserInfo;
-import com.handtours.service.model.back.User;
-import org.apache.ibatis.session.SqlSessionFactory;
+import com.handtours.service.dao.back.UserDao;
+import com.handtours.service.model.back.UserInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -25,14 +23,13 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:application-common/*.xml"})
-@TransactionConfiguration(defaultRollback=false)
+@TransactionConfiguration(defaultRollback = false)
 public class JPATest {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
-
 
     @Test
     public void func() {
@@ -66,7 +63,6 @@ public class JPATest {
         userDao.save(accountInfo);
 
     }
-
 
 
 }

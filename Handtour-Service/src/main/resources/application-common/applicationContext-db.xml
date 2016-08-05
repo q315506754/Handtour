@@ -23,18 +23,5 @@
         <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
     </bean>
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <!--<property name="configLocation" value="classpath:mybatis-config/handtour-mybatis-config.xml"></property>-->
-        <property name="mapperLocations" value="classpath*:**/*/UserMapper.xml"></property>
-    </bean>
-
-    <!-- mybatis.spring自动映射 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.handtours.service.dao"/>
-        <property name="nameGenerator">
-            <bean class="com.handtours.service.ext.AbsoluteClassNameGenerator"></bean>
-        </property>
-    </bean>
 
 </beans>

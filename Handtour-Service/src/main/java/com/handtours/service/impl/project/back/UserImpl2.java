@@ -1,18 +1,14 @@
 package com.handtours.service.impl.project.back;
 
 import com.handtours.common.utils.Copier;
-import com.handtours.common.utils.PathUtil;
 import com.handtours.service.api.domain.back.req.LoginReq;
 import com.handtours.service.api.domain.back.req.SaveUserReq;
 import com.handtours.service.api.domain.back.res.LoginRes;
 import com.handtours.service.api.domain.back.res.SaveUserRes;
 import com.handtours.service.api.project.back.IUser;
-import com.handtours.service.dao.back.UserMapper;
+import com.handtours.service.dao.back.UserDao;
 import com.handtours.service.impl.project.core.ImplSupport;
-import com.handtours.service.model.back.User;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import com.handtours.service.model.back.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,15 +21,12 @@ import java.util.List;
  */
 public class UserImpl2 extends ImplSupport implements IUser {
     @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
-    private SqlSessionFactory sqlSessionFactory;
+    private UserDao userDao;
 
     @Override
     public LoginRes login(LoginReq param) {
         LoginRes res = new LoginRes();
-        User user = userMapper.selectByPrimaryKey(param.getUsername());
+        UserInfo user = userDao.findByMobile(param.getUsername());
         if (user == null) {
             res.set(1, "用户不存在");
         } else {
@@ -61,15 +54,15 @@ public class UserImpl2 extends ImplSupport implements IUser {
     public SaveUserRes batInsert(List<SaveUserReq> params) {
         SaveUserRes res = new SaveUserRes();
         for (SaveUserReq param : params) {
-            User record = convertReqToModel(param);
-
-            userMapper.insert(record);
+//            User record = convertReqToModel(param);
+//
+//            userMapper.insert(record);
         }
         return res;
     }
 
-    private User convertReqToModel(SaveUserReq param) {
-        User user = Copier.to(User.class).map("username", "mobile").map("password", "password", (val) -> String.valueOf(val)).from(param);
+    private UserInfo convertReqToModel(SaveUserReq param) {
+        UserInfo user = Copier.to(UserInfo.class).map("username", "mobile").map("password", "password", (val) -> String.valueOf(val)).from(param);
         logger.debug("user:" + user);
 
         return user;
@@ -86,22 +79,22 @@ public class UserImpl2 extends ImplSupport implements IUser {
     @Override
     public SaveUserRes batInsert2(List<SaveUserReq> params) {
         SaveUserRes res = new SaveUserRes();
-        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
-
-        try {
-            for (SaveUserReq param : params) {
-                User record = convertReqToModel(param);
-
-                sqlSession.insert(PathUtil.buildCls(UserMapper.class, "insert"), record);
-            }
-            sqlSession.flushStatements();
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setCode(1);
-            res.setMsg(e.getMessage());
-        } finally {
-            sqlSession.close();
-        }
+//        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+//
+//        try {
+//            for (SaveUserReq param : params) {
+//                User record = convertReqToModel(param);
+//
+//                sqlSession.insert(PathUtil.buildCls(UserMapper.class, "insert"), record);
+//            }
+//            sqlSession.flushStatements();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setCode(1);
+//            res.setMsg(e.getMessage());
+//        } finally {
+//            sqlSession.close();
+//        }
         return res;
     }
 }

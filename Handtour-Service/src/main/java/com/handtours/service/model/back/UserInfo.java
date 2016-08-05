@@ -2,9 +2,23 @@ package com.handtours.service.model.back;
 
 import com.handtours.service.model.core.Model;
 
-public class User extends Model {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * @author Administrator
+ *
+ *         CreatedTime  2016/7/21 0021 14:38
+ */
+@Entity
+@Table(name = "back_user")
+public class UserInfo extends Model{
+    @Id
     private String mobile;
 
+    @Column(name = "name")
     private String name;
 
     private String password;
@@ -14,7 +28,7 @@ public class User extends Model {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
     public String getName() {
@@ -22,7 +36,7 @@ public class User extends Model {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPassword() {
@@ -30,6 +44,6 @@ public class User extends Model {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 }

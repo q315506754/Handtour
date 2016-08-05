@@ -1,6 +1,6 @@
-package com.handtours.service.jpa.dao.back;
+package com.handtours.service.dao.back;
 
-import com.handtours.service.jpa.model.back.UserInfo;
+import com.handtours.service.model.back.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
