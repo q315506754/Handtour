@@ -12,7 +12,7 @@ import javax.persistence.Table;
  *
  *         CreatedTime  2016/7/21 0021 14:38
  */
-@Entity
+@Entity(name="back.UserInfo")
 @Table(name = "back_user")
 public class UserInfo extends Model{
     @Id

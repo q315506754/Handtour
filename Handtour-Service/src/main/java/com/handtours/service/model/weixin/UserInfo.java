@@ -12,7 +12,7 @@ import javax.persistence.Table;
  *
  *         CreatedTime  2016/7/21 0021 14:38
  */
-@Entity
+@Entity(name="weixin.UserInfo")
 @Table(name = "weixin_user")
 public class UserInfo extends Model{
     @Id

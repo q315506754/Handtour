@@ -19,7 +19,7 @@ public interface UserDao extends Repository<UserInfo, String> {
     // 你需要做的，仅仅是新增如下一行方法声明
      UserInfo findByMobile(String mobile);
 
-    @Query("select a from UserInfo a where a.mobile like  CONCAT('%',CONCAT(:mobile, '%'))")
+    @Query("select a from back.UserInfo a where a.mobile like  CONCAT('%',CONCAT(:mobile, '%'))")
      Page<UserInfo> findByMobileRegex(
             @Param("mobile") String mobile, Pageable pageable);
 }
