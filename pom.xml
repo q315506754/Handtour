@@ -12,9 +12,9 @@
     <name>Handtour-parent</name>
 
     <modules>
-        <module>Common</module>
-        <module>Service</module>
-        <module>ServiceAPI</module>
+        <module>Handtour-Common</module>
+        <module>Handtour-Service</module>
+        <module>Handtour-ServiceAPI</module>
     </modules>
 
     <repositories>
@@ -32,25 +32,25 @@
         <!--</repository>-->
 
         <!--<repository>-->
-            <!--<id>OSChina Central</id>-->
-            <!--<name>OSChina Central</name>-->
-            <!--<url>http://maven.oschina.net/content/groups/public/</url>-->
-        <!--</repository>-->
+        <!--<id>OSChina Central</id>-->
+        <!--<name>OSChina Central</name>-->
+        <!--<url>http://maven.oschina.net/content/groups/public/</url>-->
+    <!--</repository>-->
         <repository>
             <id>maven central</id>
             <name>maven central</name>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
-        <repository>
-            <id>mvnrepository</id>
-            <name>mvnrepository</name>
-            <url>http://mvnrepository.com/</url>
-        </repository>
-        <repository>
-            <id>sonatype</id>
-            <name>sonatype</name>
-            <url>http://www.sonatype.org/nexus/</url>
-        </repository>
+        <!--<repository>-->
+            <!--<id>mvnrepository</id>-->
+            <!--<name>mvnrepository</name>-->
+            <!--<url>http://mvnrepository.com/</url>-->
+        <!--</repository>-->
+        <!--<repository>-->
+            <!--<id>sonatype</id>-->
+            <!--<name>sonatype</name>-->
+            <!--<url>http://www.sonatype.org/nexus/</url>-->
+        <!--</repository>-->
 
     </repositories>
 
@@ -331,7 +331,7 @@
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
-                <version>1.2.15</version>
+                <version>1.2.17</version>
                 <exclusions>
                     <exclusion>
                         <groupId>com.sun.jdmk</groupId>

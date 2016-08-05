@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.Handtour</groupId>
-    <artifactId>Service</artifactId>
+    <artifactId>Handtour-Service</artifactId>
     <packaging>jar</packaging>
     <version>${com.provider-version}</version>
 
@@ -18,12 +18,12 @@
     <dependencies>
         <dependency>
             <groupId>com.Handtour</groupId>
-            <artifactId>Common</artifactId>
+            <artifactId>Handtour-Common</artifactId>
             <version>${com.provider-version}</version>
         </dependency>
         <dependency>
             <groupId>com.Handtour</groupId>
-            <artifactId>ServiceAPI</artifactId>
+            <artifactId>Handtour-ServiceAPI</artifactId>
             <version>${com.provider-version}</version>
         </dependency>
 

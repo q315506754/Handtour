@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.Handtour</groupId>
-    <artifactId>Common</artifactId>
+    <artifactId>Handtour-Common</artifactId>
     <packaging>jar</packaging>
     <version>${com.provider-version}</version>
 
