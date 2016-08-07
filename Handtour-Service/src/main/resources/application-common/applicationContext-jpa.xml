@@ -33,6 +33,7 @@
                       entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="transactionManager"
                       repository-impl-postfix="Impl"
+                      
     >
     </jpa:repositories>
 
