@@ -2,10 +2,7 @@ package com.handtours.service.model.back;
 
 import com.handtours.service.model.core.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Administrator
@@ -22,6 +19,9 @@ public class UserInfo extends Model{
     private String name;
 
     private String password;
+
+    @OneToOne
+    private Address address;
 
     public String getMobile() {
         return mobile;
@@ -41,6 +41,14 @@ public class UserInfo extends Model{
 
     public String getPassword() {
         return password;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setPassword(String password) {

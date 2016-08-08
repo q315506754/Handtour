@@ -20,7 +20,8 @@ public  class UserDaoImpl implements  UserDaoCustom{
 
     @Override
     public UserInfo findByMobileCustom(String mobile) {
-        return null;
+        logger.debug("findByMobileCustom Custom...");
+        return em.find(UserInfo.class,mobile);
     }
 
 
