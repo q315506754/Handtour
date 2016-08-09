@@ -5,15 +5,7 @@ package com.handtours.service.com;
  *
  *         CreatedTime  2016/8/9 0009 10:20
  */
-public enum  Ex {
-    record_already_exist(10000);
-
-    private final int code;
-    Ex(int code) {
-        this.code = code;
-    }
-
-    public int getCode() {
-        return code;
-    }
+public class  Ex {
+    public static final int record_already_exist=10_000_000;
+    public static final int not_the_same=10_000_001;
 }

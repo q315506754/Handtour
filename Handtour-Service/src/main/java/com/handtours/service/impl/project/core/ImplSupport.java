@@ -2,6 +2,7 @@ package com.handtours.service.impl.project.core;
 
 import com.handtours.common.utils.Copier;
 import com.handtours.service.api.domain.core.req.SaveReq;
+import com.handtours.service.api.domain.core.res.Res;
 import com.handtours.service.api.domain.core.res.SaveRes;
 import com.handtours.service.com.C;
 import com.handtours.service.com.Ex;
@@ -11,6 +12,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import java.io.InputStreamReader;
@@ -38,9 +40,29 @@ public abstract class ImplSupport<T, ID extends Serializable,SREQ extends SaveRe
         }
     }
 
-    public static String  getExMsg(Ex enu,Object... args) {
-        String format = MessageFormat.format(prop.getProperty(String.valueOf(enu.getCode())), args);
+    public static String  getExMsg(int enu,Object... args) {
+        String format = MessageFormat.format(prop.getProperty(String.valueOf(enu)), args);
         return format;
+    }
+
+    public static <RES extends Res> RES  retEx(Class<RES> cls,int enu, Object... args) {
+        RES ret = null;
+        try {
+            ret = cls.newInstance();
+
+            setEx(ret,enu,args);
+        }catch (Exception e) {
+            e.printStackTrace();
+
+            ret = (RES)new Res();
+            ret.set(-100,e.getMessage());
+        }
+
+        return ret;
+    }
+
+    public static <RES extends Res> void  setEx(RES obj,int enu, Object... args) {
+        obj.set(enu,getExMsg(enu,args));
     }
 
     @Override
@@ -60,7 +82,7 @@ public abstract class ImplSupport<T, ID extends Serializable,SREQ extends SaveRe
             if (unitqueId != null) {
                 T one = getDao().findOne(unitqueId);
                 if (one!=null) {
-                    ret.set(Ex.record_already_exist.getCode(),getExMsg(Ex.record_already_exist,get_C_ex_exist()));
+                    setEx(ret,Ex.record_already_exist,get_C_ex_exist());
                 }
             }
 
@@ -88,7 +110,7 @@ public abstract class ImplSupport<T, ID extends Serializable,SREQ extends SaveRe
         return ret;
     }
 
-    public abstract CrudRepository<T, ID> getDao() ;
+    public abstract JpaRepository<T, ID> getDao() ;
     public abstract Class<T> getEntityClass() ;
 
 

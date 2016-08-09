@@ -5,6 +5,7 @@ import com.handtours.service.api.domain.back.req.LoginReq;
 import com.handtours.service.api.domain.back.req.QueryUserReq;
 import com.handtours.service.api.domain.back.req.SaveUserReq;
 import com.handtours.service.api.domain.back.res.LoginRes;
+import com.handtours.service.api.domain.back.res.QueryUserOne;
 import com.handtours.service.api.domain.back.res.QueryUserRes;
 import com.handtours.service.api.domain.back.res.SaveUserRes;
 import com.handtours.service.api.domain.core.res.SaveRes;
@@ -14,7 +15,13 @@ import com.handtours.service.impl.project.core.ImplSupport;
 import com.handtours.service.model.back.User;
 import com.handtours.service.com.Ex;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 
 /**
  * @author Jiangli
@@ -31,13 +38,18 @@ public class UserImpl extends ImplSupport<User, String,SaveUserReq,SaveUserRes> 
     }
 
     @Override
-    public CrudRepository<User, String> getDao() {
+    public JpaRepository<User, String> getDao() {
         return userDao;
     }
 
     @Override
     public SaveUserRes save(SaveUserReq params) {
-        SaveUserRes ret = super.save(params, SaveUserRes.class);
+        Class<SaveUserRes> cls = SaveUserRes.class;
+        if (!params.getPassword().equals(params.getSecondPassword())) {
+            return retEx(cls,Ex.not_the_same,"密码") ;
+        }
+
+        SaveUserRes ret = super.save(params, cls);
         return ret;
     }
 
@@ -58,6 +70,17 @@ public class UserImpl extends ImplSupport<User, String,SaveUserReq,SaveUserRes> 
 
     @Override
     public QueryUserRes query(QueryUserReq params) {
-        return null;
+        QueryUserRes res = new QueryUserRes();
+        PageRequest pageRequest=new PageRequest(0,10);
+
+        Page<User> users = userDao.queryList(params.getKeyword(), pageRequest);
+        Page<QueryUserOne> map = users.map(user -> {
+            QueryUserOne one = new QueryUserOne();
+            return one;
+        });
+        List<QueryUserOne> content = map.getContent();
+
+        res.setDataList(content);
+        return res;
     }
 }
