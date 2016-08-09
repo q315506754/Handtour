@@ -2,99 +2,62 @@ package com.handtours.service.impl.project.back;
 
 import com.handtours.common.utils.Copier;
 import com.handtours.service.api.domain.back.req.LoginReq;
+import com.handtours.service.api.domain.back.req.QueryUserReq;
 import com.handtours.service.api.domain.back.req.SaveUserReq;
 import com.handtours.service.api.domain.back.res.LoginRes;
+import com.handtours.service.api.domain.back.res.QueryUserRes;
 import com.handtours.service.api.domain.back.res.SaveUserRes;
+import com.handtours.service.api.domain.core.res.SaveRes;
 import com.handtours.service.api.project.back.IUser;
 import com.handtours.service.dao.back.UserDao;
 import com.handtours.service.impl.project.core.ImplSupport;
-import com.handtours.service.model.back.UserInfo;
+import com.handtours.service.model.back.User;
+import com.handtours.service.com.Ex;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author Jiangli
  *
  *         CreatedTime  2016/7/18 0018 10:43
  */
-public class UserImpl extends ImplSupport implements IUser {
+public class UserImpl extends ImplSupport<User, String,SaveUserReq,SaveUserRes> implements IUser {
     @Autowired
     private UserDao userDao;
 
     @Override
     public LoginRes login(LoginReq param) {
-        LoginRes res = new LoginRes();
-        UserInfo user = userDao.findByMobile(param.getUsername());
-        if (user == null) {
-            res.set(1, "用户不存在");
-        } else {
-            if (!user.getPassword().equals(param.getPassword())) {
-                res.set(2, "密码不正确");
-            } else {
-                Copier.to(res).from(user);
-            }
-
-        }
-
-        return res;
+        return null;
     }
 
-    /**
-     * 注解事务test
-     * 任意一条插入失败会导致回滚
-     *
-     * @param params
-     *
-     * @return
-     */
-    @Transactional
     @Override
-    public SaveUserRes batInsert(List<SaveUserReq> params) {
-        SaveUserRes res = new SaveUserRes();
-        for (SaveUserReq param : params) {
-//            User record = convertReqToModel(param);
-//
-//            userMapper.insert(record);
-        }
-        return res;
+    public CrudRepository<User, String> getDao() {
+        return userDao;
     }
 
-    private UserInfo convertReqToModel(SaveUserReq param) {
-        UserInfo user = Copier.to(UserInfo.class).map("username", "mobile").map("password", "password", (val) -> String.valueOf(val)).from(param);
-        logger.debug("user:" + user);
-
-        return user;
-    }
-
-    /**
-     * SqlSession事务 批量操作test
-     * 任意一条插入失败会导致回滚
-     *
-     * @param params
-     *
-     * @return
-     */
     @Override
-    public SaveUserRes batInsert2(List<SaveUserReq> params) {
-        SaveUserRes res = new SaveUserRes();
-//        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
-//
-//        try {
-//            for (SaveUserReq param : params) {
-//                User record = convertReqToModel(param);
-//
-//                sqlSession.insert(PathUtil.buildCls(UserMapper.class, "insert"), record);
-//            }
-//            sqlSession.flushStatements();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            res.setCode(1);
-//            res.setMsg(e.getMessage());
-//        } finally {
-//            sqlSession.close();
-//        }
-        return res;
+    public SaveUserRes save(SaveUserReq params) {
+        SaveUserRes ret = super.save(params, SaveUserRes.class);
+        return ret;
+    }
+
+    @Override
+    public Class<User> getEntityClass() {
+        return User.class;
+    }
+
+    @Override
+    protected String get_C_requestId(SaveUserReq req) {
+        return req.getMobile();
+    }
+
+    @Override
+    protected Object[] get_C_ex_exist() {
+        return new Object[]{"账号"};
+    }
+
+    @Override
+    public QueryUserRes query(QueryUserReq params) {
+        return null;
     }
 }

@@ -3,6 +3,7 @@ package com.handtours.service.impltest.project.back;
 import com.handtours.service.api.domain.back.req.SaveUserReq;
 import com.handtours.service.api.domain.back.res.SaveUserRes;
 import com.handtours.service.api.project.back.IUser;
+import com.handtours.service.commontest.BaseTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,32 +20,24 @@ import java.util.ArrayList;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:application-common/*.xml", "classpath*:application-service/*.xml"})
-public class UserTest {
+public class UserTest extends BaseTest {
     @Autowired
     @Qualifier("bean_back_user")
     private IUser iUser;
 
     @Test
-    public void func() {
+    public void func_save() {
         System.out.println(iUser);
-    }
 
-    @Test
-    public void func2() {
-        ArrayList<SaveUserReq> params = new ArrayList<>();
-        params.add(new SaveUserReq("13761156783", "123456"));
-        params.add(new SaveUserReq("13761156786", "123456"));
-        SaveUserRes res = iUser.batInsert(params);
-        System.out.println(res);
-    }
+        SaveUserReq params = new SaveUserReq();
+        params.setMobile(TEST_MOBILE);
+        params.setName("name:" + rnd());
+        params.setPassword(rnd() + "");
+        params.setEnable(true);
+        params.setEmail(rnd() + "@qq.com");
 
-    @Test
-    public void func3() {
-        ArrayList<SaveUserReq> params = new ArrayList<>();
-        params.add(new SaveUserReq("13761156782", "123456"));
-        params.add(new SaveUserReq("13761156786", "123456"));
-        SaveUserRes res = iUser.batInsert2(params);
-        System.out.println(res);
+        SaveUserRes save = iUser.save(params);
+        System.out.println(save);
     }
 
 }

@@ -43,7 +43,7 @@ public class Runner {
             logger.debug("load xml over...");
 
             long cost = System.currentTimeMillis() - l;
-            logger.debug("cost time:"+ TimeUtil.getCNSAndMilitring(cost));
+            logger.debug("cost time:" + TimeUtil.getCNSAndMilitring(cost));
 //            System.in.read(); // 按任意键退出
             synchronized (logger) {
                 logger.wait();

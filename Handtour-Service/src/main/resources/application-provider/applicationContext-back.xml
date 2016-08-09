@@ -10,7 +10,7 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 >
 
-    <dubbo:service interface="com.handtours.service.api.project.back.IUser" ref="bean_back_user"  group="UserImpl"/>
-    <dubbo:service interface="com.handtours.service.api.project.back.IUser" ref="bean_back_user2" group="UserImpl2" />
+    <dubbo:service interface="com.handtours.service.api.project.back.IUser" ref="bean_back_user" group="UserImpl"/>
+    <dubbo:service interface="com.handtours.service.api.project.back.IUser" ref="bean_back_user2" group="UserImpl2"/>
 
 </beans>

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
-            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
     http://www.springframework.org/schema/data/jpa
-    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+    http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd"
 >
     <bean id="jpaTransactionManager"
           class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -17,7 +13,7 @@
     </bean>
     <bean id="entityManagerFactory" class=
             "org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.handtours.service.model"></property>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
     </bean>
@@ -34,6 +30,8 @@
                       transaction-manager-ref="jpaTransactionManager"
                       repository-impl-postfix="Impl"
     >
+                      <!--repository-base-class="com.handtours.service.dao.common.BaseCustomRepository"-->
     </jpa:repositories>
 
+    <jpa:auditing ></jpa:auditing>
 </beans>

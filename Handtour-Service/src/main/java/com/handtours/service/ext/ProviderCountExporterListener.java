@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ProviderCountExporterListener implements ExporterListener {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    protected int count=0;
+    protected int count = 0;
 
     @Override
     public void exported(Exporter<?> exporter) throws RpcException {
@@ -30,10 +30,10 @@ public class ProviderCountExporterListener implements ExporterListener {
         String uniqueKey = DubboUtil.uniqueKey(anInterface, url);
 
         String prefix = ">>>";
-        String dprefix = prefix+prefix;
-        logger.debug((++count) + prefix + "uniqueKey:"+uniqueKey);
-        logger.debug(dprefix +"URL:"+url);
-        logger.debug(dprefix +"impl:"+JavassistExProxyFactory.infToImplMap.get(uniqueKey));
+        String dprefix = prefix + prefix;
+        logger.debug((++count) + prefix + "uniqueKey:" + uniqueKey);
+        logger.debug(dprefix + "URL:" + url);
+        logger.debug(dprefix + "impl:" + JavassistExProxyFactory.infToImplMap.get(uniqueKey));
 
 
     }

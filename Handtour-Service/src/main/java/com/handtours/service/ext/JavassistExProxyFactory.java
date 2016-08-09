@@ -34,7 +34,7 @@ public class JavassistExProxyFactory extends JavassistProxyFactory {
 //        logger.debug("type:"+type);
 
         String uniqueKey = DubboUtil.uniqueKey(type, url);
-        infToImplMap.put(uniqueKey,proxy.toString());
+        infToImplMap.put(uniqueKey, proxy.toString());
 
         Invoker<T> invoker = super.getInvoker(proxy, type, url);
         return invoker;
