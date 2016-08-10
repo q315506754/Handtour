@@ -62,10 +62,10 @@ public class BackUserTest extends BaseTest {
     @Test
     public void func_update_() {
         User byMobile = userDao.findOne(TEST_MOBILE);
-        System.out.println("org:"+byMobile);
+        System.out.println("org:" + byMobile);
 
-        byMobile.setName("updated name..."+rnd());
+        byMobile.setName("updated name..." + rnd());
         userDao.save(byMobile);
-        System.out.println("after:"+byMobile);
+        System.out.println("after:" + byMobile);
     }
 }

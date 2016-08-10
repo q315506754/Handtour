@@ -1,9 +1,7 @@
 package com.handtours.service.model.back;
 
 import com.handtours.service.model.core.Model;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -24,15 +22,26 @@ import java.util.Date;
 public class User extends Model {
     @Id
     private String mobile;
+
     private String name;
     private String email;
     private Boolean isEnable;
     private String password;
 
+    private Boolean isDeleted = false;
+
     @LastModifiedDate
     private Date lastUpdateTime;
     @CreatedDate
     private Date createTime;
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
 
     @Override
     public Date getLastUpdateTime() {
@@ -89,6 +98,7 @@ public class User extends Model {
     public String getPassword() {
         return password;
     }
+
 
     public void setPassword(String password) {
         this.password = password;

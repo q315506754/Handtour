@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
@@ -24,7 +23,7 @@ public class BaseCustomRepository<T, ID extends Serializable>
     private final EntityManager entityManager;
 
     public BaseCustomRepository(JpaEntityInformation entityInformation,
-                            EntityManager entityManager) {
+                                EntityManager entityManager) {
         super(entityInformation, entityManager);
 
         // Keep the EntityManager around to used from the newly introduced methods.

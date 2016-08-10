@@ -30,8 +30,8 @@
                       transaction-manager-ref="jpaTransactionManager"
                       repository-impl-postfix="Impl"
     >
-                      <!--repository-base-class="com.handtours.service.dao.common.BaseCustomRepository"-->
+        <!--repository-base-class="com.handtours.service.dao.common.BaseCustomRepository"-->
     </jpa:repositories>
 
-    <jpa:auditing ></jpa:auditing>
+    <jpa:auditing></jpa:auditing>
 </beans>

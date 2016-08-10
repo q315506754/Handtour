@@ -1,10 +1,6 @@
 package com.handtours.service.api.project.back;
-import com.handtours.service.api.domain.back.req.LoginReq;
-import com.handtours.service.api.domain.back.req.QueryUserReq;
-import com.handtours.service.api.domain.back.req.SaveUserReq;
-import com.handtours.service.api.domain.back.res.LoginRes;
-import com.handtours.service.api.domain.back.res.QueryUserRes;
-import com.handtours.service.api.domain.back.res.SaveUserRes;
+import com.handtours.service.api.domain.back.req.*;
+import com.handtours.service.api.domain.back.res.*;
 
 import java.util.List;
 
@@ -19,5 +15,10 @@ public interface IUser {
     SaveUserRes save(SaveUserReq params);
 
     QueryUserRes query(QueryUserReq params);
+
+    UpdateUserRes update(UpdateUserReq params);
+
+    DeleteUserRes delete(DeleteUserReq params);
+
 
 }
