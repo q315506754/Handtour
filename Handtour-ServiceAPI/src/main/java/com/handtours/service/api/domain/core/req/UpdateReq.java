@@ -1,5 +1,7 @@
 package com.handtours.service.api.domain.core.req;
 
+import java.util.Date;
+
 /**
  * @author Jiangli
  *
@@ -8,6 +10,18 @@ package com.handtours.service.api.domain.core.req;
 public class UpdateReq<ID> extends Req {
     private ID id;
     private Boolean isDeleted;
+    private Long lastUpdateTimeTs;
+
+    public UpdateReq() {
+    }
+
+    public Long getLastUpdateTimeTs() {
+        return lastUpdateTimeTs;
+    }
+
+    public void setLastUpdateTimeTs(Long lastUpdateTimeTs) {
+        this.lastUpdateTimeTs = lastUpdateTimeTs;
+    }
 
     public UpdateReq(ID id) {
         this.id = id;

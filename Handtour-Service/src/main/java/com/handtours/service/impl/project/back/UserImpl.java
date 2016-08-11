@@ -40,7 +40,6 @@ public class UserImpl extends ImplSupport<User, String, SaveUserReq, SaveUserRes
         if (!params.getPassword().equals(params.getSecondPassword())) {
             return retEx(cls, Ex.not_the_same, "密码");
         }
-
         SaveUserRes ret = super.save(params, cls, null);
         return ret;
     }
@@ -79,12 +78,19 @@ public class UserImpl extends ImplSupport<User, String, SaveUserReq, SaveUserRes
 
     @Override
     public UpdateUserRes update(UpdateUserReq params) {
-        UpdateUserRes update = super.update(params, UpdateUserRes.class, null);
+        Class<UpdateUserRes> cls = UpdateUserRes.class;
+
+        if (params.getPassword() != null && params.getSecondPassword() != null && !params.getPassword().equals(params.getSecondPassword())) {
+            return retEx(cls, Ex.not_the_same, "密码");
+        }
+
+        UpdateUserRes update = super.update(params, cls, null);
         return update;
     }
 
     @Override
     public DeleteUserRes delete(DeleteUserReq params) {
+
         DeleteUserRes deleted = super.delete(params, DeleteUserRes.class, null);
         return deleted;
     }

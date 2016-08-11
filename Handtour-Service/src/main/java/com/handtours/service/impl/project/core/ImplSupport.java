@@ -1,6 +1,7 @@
 package com.handtours.service.impl.project.core;
 
 import com.handtours.common.utils.Copier;
+import com.handtours.common.utils.MethodUtil;
 import com.handtours.service.api.domain.core.req.DeleteReq;
 import com.handtours.service.api.domain.core.req.PageReq;
 import com.handtours.service.api.domain.core.req.SaveReq;
@@ -19,7 +20,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -69,8 +72,9 @@ public abstract class ImplSupport<T, ID extends Serializable,
         return ret;
     }
 
-    public static <RES extends Res> void setEx(RES obj, int enu, Object... args) {
+    public static <RES extends Res> RES setEx(RES obj, int enu, Object... args) {
         obj.set(enu, getExMsg(enu, args));
+        return obj;
     }
 
     @Override
@@ -163,6 +167,12 @@ public abstract class ImplSupport<T, ID extends Serializable,
                 setEx(ret, Ex.record_note_exist, generateRecordTitle());
             }
 
+            if (req.getLastUpdateTimeTs() != null && one != null) {
+                if (!isLastTsEquals(req, one)) {
+                    setEx(ret, Ex.record_has_changed, generateRecordTitle());
+                }
+            }
+
             if (ret.getCode() == 0) {
                 Copier<T> to = Copier.to(one);
 
@@ -189,6 +199,26 @@ public abstract class ImplSupport<T, ID extends Serializable,
         return ret;
     }
 
+    private boolean isLastTsEquals(UREQ req, T one) {
+        try {
+            Long postTs = req.getLastUpdateTimeTs();
+            Object lastUpdateTime = MethodUtil.invokeGetter(one, "lastUpdateTime");
+            Long dbLastTs = null;
+            if (lastUpdateTime instanceof Date) {
+                dbLastTs = ((Date) lastUpdateTime).getTime();
+            }
+            if (lastUpdateTime instanceof Long) {
+                dbLastTs = ((Long) lastUpdateTime);
+            }
+            if (dbLastTs != null) {
+                return postTs.equals(dbLastTs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     @Override
     public DRES delete(DREQ req, Class<DRES> cls, ReqCopierChain<T> copierChain) {
         DRES ret = null;
@@ -203,16 +233,36 @@ public abstract class ImplSupport<T, ID extends Serializable,
             ret.set(-103, e.getMessage());
         }
 
-        //logic delete
-        if (req.getLogicalDeletion()!= null && req.getLogicalDeletion()) {
-            UpdateReq<ID> updateReq = new UpdateReq<ID>(id);
-            updateReq.setDeleted(true);
-            UpdateRes update = this.update((UREQ)updateReq,(Class)UpdateRes.class,null );
-            if (ret != null) {
-                ret.set(update.getCode(),update.getMsg());
+
+        if (ret.getCode() == 0) {
+            //logic delete
+            if (req.getLogicalDeletion()!= null && req.getLogicalDeletion()) {
+                UpdateReq<ID> updateReq = new UpdateReq<ID>(id);
+                updateReq.setDeleted(true);
+                updateReq.setLastUpdateTimeTs(req.getLastUpdateTimeTs());
+                UpdateRes update = this.update((UREQ)updateReq,(Class)UpdateRes.class,null );
+                if (ret != null) {
+                    ret.set(update.getCode(),update.getMsg());
+                }
+            } else {
+                //physical delete
+                T one = null;
+                if (id != null) {
+                    one = getDao().findOne(id);
+                } else {
+                    logger.warn("no id for delete:" + req);
+                }
+
+                if (one == null) {
+                    setEx(ret, Ex.record_note_exist, generateRecordTitle());
+                }
+
+                if (ret.getCode() == 0) {
+                    //do delete
+                    getDao().delete(id);
+                }
+
             }
-        } else {
-            //physical delete
         }
 
         return ret;

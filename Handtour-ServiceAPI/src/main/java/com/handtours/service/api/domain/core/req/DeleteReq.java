@@ -8,6 +8,15 @@ package com.handtours.service.api.domain.core.req;
 public class DeleteReq<ID> extends Req {
     private Boolean isLogicalDeletion =true;
     private ID id;
+    private Long lastUpdateTimeTs;
+
+    public Long getLastUpdateTimeTs() {
+        return lastUpdateTimeTs;
+    }
+
+    public void setLastUpdateTimeTs(Long lastUpdateTimeTs) {
+        this.lastUpdateTimeTs = lastUpdateTimeTs;
+    }
 
     public DeleteReq() {
     }

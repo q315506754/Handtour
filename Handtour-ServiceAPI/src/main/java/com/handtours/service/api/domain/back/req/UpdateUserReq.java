@@ -15,6 +15,9 @@ public class UpdateUserReq extends UpdateReq<String> {
     private String password;
     private String secondPassword;
 
+    public UpdateUserReq() {
+    }
+
     public UpdateUserReq(String s) {
         super(s);
     }

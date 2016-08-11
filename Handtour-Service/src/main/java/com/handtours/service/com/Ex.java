@@ -12,4 +12,5 @@ public class Ex {
     public static final int record_already_exist = 10_000_000;
     public static final int not_the_same = 10_000_001;
     public static final int record_note_exist = 10_000_002;
+    public static final int record_has_changed = 10_000_003;
 }

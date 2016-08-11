@@ -125,14 +125,38 @@ public class UserTest extends BaseTest {
     }
 
     @Test
+    public void func_update_with_ts() {
+        UpdateUserReq params = new UpdateUserReq(TEST_MOBILE);
+        params.setLastUpdateTimeTs(System.currentTimeMillis());
+        params.setName("updated name:" + rnd());
+        UpdateUserRes query = iUser.update(params);
+        System.out.println(query);
+    }
+
+    @Test
     public void func_drop_save_and_update() {
        func_drop_and_save();
         func_update_name();
     }
 
     @Test
-    public void func_delete() {
+    public void func_delete_logic() {
         DeleteUserReq params = new DeleteUserReq(TEST_MOBILE);
+        DeleteUserRes query = iUser.delete(params);
+        System.out.println(query);
+    }
+    @Test
+    public void func_delete_logic_with_ts() {
+        DeleteUserReq params = new DeleteUserReq(TEST_MOBILE);
+        params.setLastUpdateTimeTs(System.currentTimeMillis());
+        DeleteUserRes query = iUser.delete(params);
+        System.out.println(query);
+    }
+
+    @Test
+    public void func_delete_physical() {
+        DeleteUserReq params = new DeleteUserReq(TEST_MOBILE);
+        params.setLogicalDeletion(false);
         DeleteUserRes query = iUser.delete(params);
         System.out.println(query);
     }
