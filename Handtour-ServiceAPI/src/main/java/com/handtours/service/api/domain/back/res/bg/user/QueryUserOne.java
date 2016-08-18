@@ -1,4 +1,4 @@
-package com.handtours.service.api.domain.back.res;
+package com.handtours.service.api.domain.back.res.bg.user;
 
 import java.io.Serializable;
 
@@ -15,6 +15,15 @@ public class QueryUserOne implements Serializable {
     private String lastUpdateTime;
     private Long lastUpdateTimeTs;
     private String createTime;
+    private String avatarUrl;
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 
     public Long getLastUpdateTimeTs() {
         return lastUpdateTimeTs;

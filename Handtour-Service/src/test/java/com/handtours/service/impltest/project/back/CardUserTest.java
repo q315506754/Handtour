@@ -1,10 +1,16 @@
 package com.handtours.service.impltest.project.back;
 
-import com.handtours.service.api.domain.back.req.bg.user.*;
-import com.handtours.service.api.domain.back.res.bg.user.*;
-import com.handtours.service.api.project.back.IUser;
+import com.handtours.service.api.domain.core.req.card.user.DeleteCardUserReq;
+import com.handtours.service.api.domain.core.req.card.user.QueryCardUserReq;
+import com.handtours.service.api.domain.core.req.card.user.SaveCardUserReq;
+import com.handtours.service.api.domain.core.req.card.user.UpdateCardUserReq;
+import com.handtours.service.api.domain.core.res.card.user.DeleteCardUserRes;
+import com.handtours.service.api.domain.core.res.card.user.QueryCardUserRes;
+import com.handtours.service.api.domain.core.res.card.user.SaveCardUserRes;
+import com.handtours.service.api.domain.core.res.card.user.UpdateCardUserRes;
+import com.handtours.service.api.project.core.ICardUser;
 import com.handtours.service.commontest.BaseTest;
-import com.handtours.service.dao.back.UserDao;
+import com.handtours.service.dao.common.CardUserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +26,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:application-common/*.xml", "classpath*:application-service/*.xml"})
-public class UserTest extends BaseTest {
+public class CardUserTest extends BaseTest {
     @Autowired
-    @Qualifier("bean_back_user")
-    private IUser iUser;
+    @Qualifier("bean_card_user")
+    private ICardUser iUser;
     @Autowired
-    private UserDao userDao;
+    private CardUserDao userDao;
 
     @Test
     public void func_drop_and_save() {
@@ -40,7 +46,7 @@ public class UserTest extends BaseTest {
     public void func_save_not_same() {
         System.out.println(iUser);
 
-        SaveUserReq params = new SaveUserReq();
+        SaveCardUserReq params = new SaveCardUserReq();
         params.setMobile(TEST_MOBILE);
         params.setName("name:" + rnd());
         params.setPassword(rnd() + "");
@@ -48,14 +54,14 @@ public class UserTest extends BaseTest {
         params.setEnable(true);
         params.setEmail(rnd() + "@qq.com");
 
-        SaveUserRes save = iUser.save(params);
+        SaveCardUserRes save = iUser.save(params);
         System.out.println(save);
     }
 
     @Repeat(22)
     @Test
     public void func_save_multi() {
-        SaveUserReq params = new SaveUserReq();
+        SaveCardUserReq params = new SaveCardUserReq();
         params.setMobile("13" + rnd());
         params.setName("multi name:" + rnd());
         String secondPassword = rnd() + "";
@@ -64,7 +70,7 @@ public class UserTest extends BaseTest {
         params.setEnable(true);
         params.setEmail(rnd() + "@qq.com");
 
-        SaveUserRes save = iUser.save(params);
+        SaveCardUserRes save = iUser.save(params);
         System.out.println(save);
     }
 
@@ -72,102 +78,87 @@ public class UserTest extends BaseTest {
     public void func_save_same() {
         System.out.println(iUser);
 
-        SaveUserReq params = new SaveUserReq();
+        SaveCardUserReq params = new SaveCardUserReq();
         params.setMobile(TEST_MOBILE);
-        params.setName("name:" + rnd());
+//        params.setName("name:" + rnd());
         String secondPassword = rnd() + "";
         params.setPassword(secondPassword);
         params.setSecondPassword(secondPassword);
         params.setEnable(true);
-        params.setEmail(rnd() + "@qq.com");
+//        params.setEmail(rnd() + "@qq.com");
 
-        SaveUserRes save = iUser.save(params);
+        SaveCardUserRes save = iUser.save(params);
         System.out.println(save);
     }
 
     @Test
     public void func_query() {
-        QueryUserReq params = new QueryUserReq();
+        QueryCardUserReq params = new QueryCardUserReq();
         params.setKeyword("137");
-        QueryUserRes query = iUser.query(params);
+        QueryCardUserRes query = iUser.query(params);
         System.out.println(query);
     }
 
     @Test
     public void func_query_all() {
-        QueryUserReq params = new QueryUserReq();
+        QueryCardUserReq params = new QueryCardUserReq();
 //        params.setKeyword("137");
-        QueryUserRes query = iUser.query(params);
-        System.out.println(query);
-    }
-
-    @Test
-    public void func_login() {
-        LoginUserReq param = new LoginUserReq();
-        param.setUsername("13761156786");
-        LoginUserRes query = iUser.login(param);
-        System.out.println(query);
-    }
-
-    @Test
-    public void func_login_not_exist() {
-        LoginUserReq param = new LoginUserReq();
-        param.setUsername("sdas");
-        LoginUserRes query = iUser.login(param);
+        QueryCardUserRes query = iUser.query(params);
         System.out.println(query);
     }
 
     @Test
     public void func_query_all_page() {
-        QueryUserReq params = new QueryUserReq();
+        QueryCardUserReq params = new QueryCardUserReq();
 //        params.setKeyword("137");
         params.setPageIndex(2);
-        QueryUserRes query = iUser.query(params);
+        QueryCardUserRes query = iUser.query(params);
         System.out.println(query);
     }
 
     @Test
     public void func_update_name() {
-        UpdateUserReq params = new UpdateUserReq(TEST_MOBILE);
+        UpdateCardUserReq params = new UpdateCardUserReq(TEST_MOBILE);
         params.setName("updated name:" + rnd());
-        UpdateUserRes query = iUser.update(params);
+        UpdateCardUserRes query = iUser.update(params);
         System.out.println(query);
     }
 
     @Test
     public void func_update_with_ts() {
-        UpdateUserReq params = new UpdateUserReq(TEST_MOBILE);
+        UpdateCardUserReq params = new UpdateCardUserReq(TEST_MOBILE);
         params.setLastUpdateTimeTs(System.currentTimeMillis());
         params.setName("updated name:" + rnd());
-        UpdateUserRes query = iUser.update(params);
+        UpdateCardUserRes query = iUser.update(params);
         System.out.println(query);
     }
 
     @Test
     public void func_drop_save_and_update() {
-       func_drop_and_save();
+        func_drop_and_save();
         func_update_name();
     }
 
     @Test
     public void func_delete_logic() {
-        DeleteUserReq params = new DeleteUserReq(TEST_MOBILE);
-        DeleteUserRes query = iUser.delete(params);
+        DeleteCardUserReq params = new DeleteCardUserReq(TEST_MOBILE);
+        DeleteCardUserRes query = iUser.delete(params);
         System.out.println(query);
     }
+
     @Test
     public void func_delete_logic_with_ts() {
-        DeleteUserReq params = new DeleteUserReq(TEST_MOBILE);
+        DeleteCardUserReq params = new DeleteCardUserReq(TEST_MOBILE);
         params.setLastUpdateTimeTs(System.currentTimeMillis());
-        DeleteUserRes query = iUser.delete(params);
+        DeleteCardUserRes query = iUser.delete(params);
         System.out.println(query);
     }
 
     @Test
     public void func_delete_physical() {
-        DeleteUserReq params = new DeleteUserReq(TEST_MOBILE);
+        DeleteCardUserReq params = new DeleteCardUserReq(TEST_MOBILE);
         params.setLogicalDeletion(false);
-        DeleteUserRes query = iUser.delete(params);
+        DeleteCardUserRes query = iUser.delete(params);
         System.out.println(query);
     }
 }

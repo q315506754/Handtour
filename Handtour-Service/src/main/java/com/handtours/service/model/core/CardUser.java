@@ -1,6 +1,5 @@
-package com.handtours.service.model.back;
+package com.handtours.service.model.core;
 
-import com.handtours.service.model.core.Model;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,20 +13,21 @@ import java.util.Date;
 /**
  * @author Administrator
  *
- *         CreatedTime  2016/7/21 0021 14:38
+ *         CreatedTime  2016/8/15 0015 14:19
  */
-@Entity(name = "bg.UserInfo")
-@Table(name = "bg_user")
+@Entity(name = "card.UserInfo")
+@Table(name = "card_user")
 @EntityListeners({AuditingEntityListener.class})
-public class User extends Model {
+public class CardUser extends Model {
     @Id
     private String mobile;
-
-    private String name;
-    private String email;
-    private Boolean isEnable;
     private String password;
-    private String avatarUrl;
+    private Integer status;//0:未审核 1:已审核
+    private Double balance;
+
+    private String email;
+    private String name;
+    private Boolean isEnable;
 
     private Boolean isDeleted = false;
 
@@ -35,6 +35,22 @@ public class User extends Model {
     private Date lastUpdateTime;
     @CreatedDate
     private Date createTime;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
 
     public Boolean getDeleted() {
         return isDeleted;
@@ -62,15 +78,6 @@ public class User extends Model {
     @Override
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     public String getMobile() {
@@ -113,4 +120,5 @@ public class User extends Model {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

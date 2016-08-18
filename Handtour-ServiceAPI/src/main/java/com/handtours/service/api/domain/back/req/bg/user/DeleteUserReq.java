@@ -1,4 +1,4 @@
-package com.handtours.service.api.domain.back.req;
+package com.handtours.service.api.domain.back.req.bg.user;
 
 import com.handtours.service.api.domain.core.req.DeleteReq;
 import com.handtours.service.api.domain.core.req.UpdateReq;

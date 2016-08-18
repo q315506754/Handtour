@@ -1,4 +1,4 @@
-package com.handtours.service.api.domain.back.res;
+package com.handtours.service.api.domain.core.res.card.user;
 
 import com.handtours.service.api.domain.core.res.UpdateRes;
 
@@ -7,6 +7,6 @@ import com.handtours.service.api.domain.core.res.UpdateRes;
  *
  *         CreatedTime  2016/7/18 0018 10:49
  */
-public class UpdateUserRes extends UpdateRes {
+public class UpdateCardUserRes extends UpdateRes {
 
 }

@@ -1,4 +1,4 @@
-package com.handtours.service.api.domain.back.req;
+package com.handtours.service.api.domain.back.req.bg.user;
 
 import com.handtours.service.api.domain.core.req.Req;
 
@@ -7,9 +7,8 @@ import com.handtours.service.api.domain.core.req.Req;
  *
  *         CreatedTime  2016/7/18 0018 10:49
  */
-public class LoginReq extends Req {
+public class LoginUserReq extends Req {
     private String username;
-    private String password;
 
     public String getUsername() {
         return username;
@@ -17,13 +16,5 @@ public class LoginReq extends Req {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

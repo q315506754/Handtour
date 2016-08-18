@@ -2,9 +2,8 @@ package com.handtours.service.impl.project.back;
 
 import com.handtours.common.utils.Copier;
 import com.handtours.common.utils.FuncUtil;
-import com.handtours.service.api.domain.back.req.*;
-import com.handtours.service.api.domain.back.res.*;
-import com.handtours.service.api.domain.core.res.UpdateRes;
+import com.handtours.service.api.domain.back.req.bg.user.*;
+import com.handtours.service.api.domain.back.res.bg.user.*;
 import com.handtours.service.api.project.back.IUser;
 import com.handtours.service.com.Ex;
 import com.handtours.service.dao.back.UserDao;
@@ -25,8 +24,19 @@ public class UserImpl extends ImplSupport<User, String, SaveUserReq, SaveUserRes
     private UserDao userDao;
 
     @Override
-    public LoginRes login(LoginReq param) {
-        return null;
+    public LoginUserRes login(LoginUserReq param) {
+        LoginUserRes ret = new LoginUserRes();
+        String username = param.getUsername();
+        if (!StringUtils.isEmpty(username)) {
+            User one = userDao.findOne(username.trim());
+            if (one == null) {
+                return setEx(ret, Ex.record_not_exist,"账号");
+            }
+            Copier<LoginUserRes> copier = Copier.to(ret);
+            copier.compose(FuncUtil.auditDate2StringCopier);
+            copier.from(one);
+        }
+        return ret;
     }
 
     @Override
@@ -71,9 +81,13 @@ public class UserImpl extends ImplSupport<User, String, SaveUserReq, SaveUserRes
                         return userDao.findAll(page);
                     }
                 },
-                () -> Copier.to(QueryUserOne.class).compose(FuncUtil.auditDate2StringCopier));
+                () -> userToModelOneCopier());
 
         return queryRs;
+    }
+
+    private Copier<QueryUserOne> userToModelOneCopier() {
+        return Copier.to(QueryUserOne.class).compose(FuncUtil.auditDate2StringCopier);
     }
 
     @Override

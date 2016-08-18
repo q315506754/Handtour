@@ -1,4 +1,4 @@
-package com.handtours.service.api.domain.back.res;
+package com.handtours.service.api.domain.back.res.bg.user;
 
 import com.handtours.service.api.domain.core.res.DeleteRes;
 import com.handtours.service.api.domain.core.res.SaveRes;

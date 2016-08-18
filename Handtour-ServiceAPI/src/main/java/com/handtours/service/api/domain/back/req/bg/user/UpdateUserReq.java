@@ -1,4 +1,4 @@
-package com.handtours.service.api.domain.back.req;
+package com.handtours.service.api.domain.back.req.bg.user;
 
 import com.handtours.service.api.domain.core.req.PageReq;
 import com.handtours.service.api.domain.core.req.UpdateReq;
@@ -14,6 +14,7 @@ public class UpdateUserReq extends UpdateReq<String> {
     private Boolean isEnable;
     private String password;
     private String secondPassword;
+    private String avatarUrl;
 
     public UpdateUserReq() {
     }
@@ -58,7 +59,17 @@ public class UpdateUserReq extends UpdateReq<String> {
         return secondPassword;
     }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
     public void setSecondPassword(String secondPassword) {
+
+
         this.secondPassword = secondPassword;
     }
 }

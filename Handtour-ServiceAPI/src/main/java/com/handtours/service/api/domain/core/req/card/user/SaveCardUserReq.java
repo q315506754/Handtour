@@ -1,6 +1,6 @@
-package com.handtours.service.api.domain.back.req;
+package com.handtours.service.api.domain.core.req.card.user;
 
-import com.handtours.service.api.domain.core.req.Req;
+import com.handtours.common.constants.core.CardStatus;
 import com.handtours.service.api.domain.core.req.SaveReq;
 
 /**
@@ -8,13 +8,33 @@ import com.handtours.service.api.domain.core.req.SaveReq;
  *
  *         CreatedTime  2016/7/18 0018 10:49
  */
-public class SaveUserReq extends SaveReq {
+public class SaveCardUserReq extends SaveReq {
     private String name;
     private String mobile;
     private String email;
+
+    private Integer status= CardStatus.NOT_AUDITED.getStatus();//0:未审核 1:已审核
+    private Double balance=0d;
+
     private Boolean isEnable;
     private String password;
     private String secondPassword;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
 
     public String getName() {
         return name;

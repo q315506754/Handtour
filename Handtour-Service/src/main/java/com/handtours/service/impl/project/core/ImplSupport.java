@@ -20,7 +20,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Properties;
@@ -164,7 +163,7 @@ public abstract class ImplSupport<T, ID extends Serializable,
             }
 
             if (one == null) {
-                setEx(ret, Ex.record_note_exist, generateRecordTitle());
+                setEx(ret, Ex.record_not_exist, generateRecordTitle());
             }
 
             if (req.getLastUpdateTimeTs() != null && one != null) {
@@ -254,7 +253,7 @@ public abstract class ImplSupport<T, ID extends Serializable,
                 }
 
                 if (one == null) {
-                    setEx(ret, Ex.record_note_exist, generateRecordTitle());
+                    setEx(ret, Ex.record_not_exist, generateRecordTitle());
                 }
 
                 if (ret.getCode() == 0) {
