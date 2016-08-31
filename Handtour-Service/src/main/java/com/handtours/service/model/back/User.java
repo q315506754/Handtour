@@ -44,22 +44,18 @@ public class User extends Model {
         isDeleted = deleted;
     }
 
-    @Override
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    @Override
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    @Override
     public Date getCreateTime() {
         return createTime;
     }
 
-    @Override
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }

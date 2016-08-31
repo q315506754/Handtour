@@ -108,6 +108,13 @@ public class Copier<T> {
 
                     describe = operMap;
                 }
+
+                for (CopierMapper mapper : mappers) {
+                    if (mapper.fieldFrom.equals(mapper.fieldTo)) {
+                        describe.remove(mapper.fieldFrom);
+                    }
+                }
+
                 BeanUtils.populate(ret, describe);
             } catch (Exception e) {
                 e.printStackTrace();

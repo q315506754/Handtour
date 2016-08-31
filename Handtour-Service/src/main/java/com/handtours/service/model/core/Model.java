@@ -31,36 +31,4 @@ public class Model {
     public String toString() {
         return ClassUtil.getToString(this);
     }
-
-    public User getCreatedUser() {
-        return createdUser;
-    }
-
-    public void setCreatedUser(User createdUser) {
-        this.createdUser = createdUser;
-    }
-
-    public User getLastModifiedUser() {
-        return lastModifiedUser;
-    }
-
-    public void setLastModifiedUser(User lastModifiedUser) {
-        this.lastModifiedUser = lastModifiedUser;
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

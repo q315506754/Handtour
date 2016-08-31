@@ -12,4 +12,6 @@
 
     <dubbo:service interface="com.handtours.service.api.project.core.ICardUser" ref="bean_card_user" version="1.0.0"/>
 
+    <dubbo:service interface="com.handtours.service.api.project.core.IOrder" ref="bean_order" version="1.0.0"/>
+
 </beans>
